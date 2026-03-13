@@ -1,82 +1,82 @@
-# 领域适配协议
+# Domain Adaptation Protocol
 
-本文件定义了 teacher skill 如何适配任意学科领域。设计目标：让同一套教学框架在任何领域都能发挥最大效果。
-
----
-
-## 通用领域适配协议
-
-当用户提出任何领域的学习需求时，按以下三步适配：
-
-### 第一步：领域探测
-
-先确认三件事：
-1. 用户在这个领域的当前水平（零基础 / 有基础 / 进阶）
-2. 学习目标（考试 / 工作应用 / 兴趣探索 / 研究深造）
-3. 是否有学习材料（教材、笔记、题库、文档）
-
-### 第二步：模式映射
-
-将七大教学模式映射到该领域的典型场景：
-
-| 通用模式 | 典型应用场景 |
-|----------|-------------|
-| 逐步拆解（A） | 数学推导、物理计算、法律案例分析、医学病例推演、金融交易复盘、工程设计验算 |
-| 苏格拉底（B） | 考试/面试/答辩准备、鉴别诊断训练、论证攻防、投资决策推演、学术答辩模拟 |
-| 心智模型（C） | 复杂系统理解 — 生态系统、经济模型、人体生理机制、法律关系图谱、组织架构 |
-| 简化+类比（D） | 用日常场景解释任何领域的专业术语和抽象概念 |
-| 详细阐述（E） | 追问机制 — 药理作用原理、法律条文立法目的、经济模型假设、物理定律推导 |
-| 交错练习（F） | 跨章节混合出题、多科目交叉练习、综合案例分析 |
-| 元认知（G） | 通用，不分领域 — 诊断学习方法、调整学习策略 |
-
-### 第三步：知识源策略
-
-不同领域对知识准确性的要求不同，遵循：
-
-- **高准确性领域**（医学、法律、金融、工程安全等）：
-  - 如果用户提供了教材/指南，以用户材料为唯一权威来源
-  - 如果没有用户材料，使用搜索工具获取权威来源，并明确标注
-  - 始终提醒用户：「这是学习辅助，不替代专业意见」
-
-- **一般学术领域**（自然科学、社会科学、人文等）：
-  - 优先使用用户材料，搜索补充最新研究成果
-  - 对于有争议的学术观点，呈现多方立场而非单一结论
-
-- **技能实践领域**（语言学习、艺术创作、体育运动等）：
-  - 侧重练习设计和反馈循环
-  - 理论讲解服务于实践，不过度理论化
+This file defines how the teacher skill adapts to any academic domain. Design goal: make the same teaching framework deliver maximum effectiveness across any domain.
 
 ---
 
-## 领域特有注意事项
+## Universal Domain Adaptation Protocol
 
-### 涉及健康/安全的领域
-- 不提供诊断、处方或治疗建议
-- 教学内容聚焦于理解原理和学习方法
-- 每次涉及具体案例时提醒：「请咨询专业人士」
+When a user presents a learning need in any domain, adapt in three steps:
 
-### 涉及法律/合规的领域
-- 不提供法律意见
-- 教学内容聚焦于法律概念和逻辑推理训练
-- 标注法律法规的时效性和地域性
+### Step 1: Domain Detection
 
-### 涉及金融/投资的领域
-- 不提供投资建议
-- 教学内容聚焦于金融原理和分析方法
-- 提醒市场风险
+Confirm three things first:
+1. The user's current level in this domain (beginner / intermediate / advanced)
+2. The learning goal (exam / professional application / personal interest / research)
+3. Whether they have learning materials (textbooks, notes, problem sets, documents)
+
+### Step 2: Mode Mapping
+
+Map the seven teaching modes to typical scenarios in the domain:
+
+| Universal Mode | Typical Use Cases |
+|----------------|------------------|
+| Guided Decomposition (A) | Math derivations, physics calculations, legal case analysis, medical case reasoning, financial transaction review, engineering design verification |
+| Socratic (B) | Exam / interview / oral defense prep, differential diagnosis training, argument and counter-argument, investment decision reasoning, academic defense simulation |
+| Mental Model (C) | Understanding complex systems — ecosystems, economic models, physiological mechanisms, legal relationship maps, organizational structures |
+| Simplification + Analogy (D) | Using everyday scenarios to explain specialized jargon and abstract concepts in any domain |
+| Deep Elaboration (E) | Probing mechanisms — pharmacological mechanisms, legislative intent of legal provisions, economic model assumptions, derivation of physical laws |
+| Interleaved Practice (F) | Cross-chapter mixed problem sets, multi-subject cross-practice, integrated case analysis |
+| Metacognition (G) | Universal — applies to all domains — diagnose study methods, adjust learning strategies |
+
+### Step 3: Knowledge Source Strategy
+
+Different domains have different accuracy requirements:
+
+- **High-accuracy domains** (medicine, law, finance, engineering safety, etc.):
+  - If the user provides textbooks / guidelines, use them as the sole authoritative source
+  - Without user materials, use search tools to find authoritative sources and explicitly cite them
+  - Always remind the user: "This is learning support — it does not replace professional advice"
+
+- **General academic domains** (natural sciences, social sciences, humanities, etc.):
+  - Prioritize user materials; use search to supplement latest research
+  - For contested academic positions, present multiple perspectives rather than a single conclusion
+
+- **Skill-based / practical domains** (language learning, art, sports, etc.):
+  - Focus on practice design and feedback loops
+  - Theory serves practice — don't over-theorize
 
 ---
 
-## 贡献新领域适配
+## Domain-Specific Notes
 
-社区可以通过以下方式贡献特定领域的深度适配文件：
+### Domains Involving Health / Safety
+- Don't provide diagnoses, prescriptions, or treatment advice
+- Teaching content focuses on understanding principles and learning methods
+- When discussing specific cases, remind the user: "Please consult a professional"
 
-1. 在 `references/` 目录下创建 `domain-<领域名>.md`
-2. 包含以下结构：
-   - 领域名称和简介
-   - 高频学习场景（3-5 个）及推荐教学模式
-   - 领域特有的教学注意事项
-   - 推荐的权威知识来源
-3. 在本文件中添加引用
+### Domains Involving Law / Compliance
+- Don't provide legal opinions
+- Teaching content focuses on legal concepts and logical reasoning training
+- Note the time-sensitivity and jurisdictional nature of laws and regulations
 
-示例文件名：`domain-medicine.md`、`domain-law.md`、`domain-finance.md`、`domain-cs.md`
+### Domains Involving Finance / Investment
+- Don't provide investment advice
+- Teaching content focuses on financial principles and analytical methods
+- Note market risk
+
+---
+
+## Contributing New Domain Adapters
+
+The community can contribute deep adapter files for specific domains:
+
+1. Create `domain-<name>.md` in the `references/` directory (e.g., `domain-medicine.md`, `domain-law.md`)
+2. Include the following structure:
+   - Domain name and brief description
+   - High-frequency learning scenarios (3–5) and recommended teaching modes
+   - Domain-specific teaching notes
+   - Recommended authoritative knowledge sources
+3. Add a reference to this file
+
+Example filenames: `domain-medicine.md`, `domain-law.md`, `domain-finance.md`, `domain-cs.md`
