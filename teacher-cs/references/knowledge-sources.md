@@ -1,119 +1,119 @@
-# 知识源适配协议
+# Knowledge Source Adapter Protocol
 
-本文件定义了 learn skill 如何接入不同类型的知识源。设计目标：让 skill 在任何平台上都能利用可用的知识源，同时保持优雅降级。
-
----
-
-## 知识源类型
-
-### 类型 1：用户上传文件
-
-最直接的知识源。用户在对话中直接提供文档、代码、笔记等。
-
-**处理方式：**
-- 将文件内容视为"教材"，教学内容优先从中提取
-- 如果文件较大，先做结构化摘要，再按需深入具体章节
-- 引用时标注文件名和位置（如"根据你上传的《操作系统导论》第 3 章..."）
-
-**支持的格式：**
-- 文本文件（.md, .txt, .rst）
-- 代码文件（任意编程语言）
-- PDF（如果平台支持）
-- 图片（如果平台支持多模态）
-
-### 类型 2：本地文档库
-
-用户工作目录中的文档，通过文件系统工具访问。
-
-**处理方式：**
-- 当用户提到"项目文档""README""设计文档"等，主动搜索工作目录
-- 使用 Glob/Grep 等工具定位相关文件
-- 读取后作为教学素材
-
-**典型路径：**
-```
-项目根目录/
-├── docs/           → 项目文档
-├── README.md       → 项目概述
-├── ARCHITECTURE.md → 架构设计
-└── examples/       → 示例代码
-```
-
-### 类型 3：互联网搜索
-
-通过搜索工具获取最新信息。
-
-**触发条件（满足任一即搜索）：**
-- 用户明确要求"查一下""搜索""最新的"
-- 涉及版本号、发布日期、API 变更等时效性信息
-- 用户材料中提到但未详细解释的外部概念
-- 教学过程中需要补充权威来源佐证
-
-**平台适配：**
-
-不同平台提供不同的搜索工具，skill 应自动检测并使用可用的工具：
-
-| 平台 | 搜索工具 | 备注 |
-|------|----------|------|
-| Claude Code + Firecrawl MCP | `mcp__firecrawl__firecrawl_search` | 功能最全，支持搜索+抓取 |
-| Claude Code + WebSearch | `WebSearch` | 内置搜索 |
-| Claude.ai | 内置搜索 | 自动可用 |
-| Cursor | 内置 @web | 通过 @ 命令触发 |
-| 通用 MCP | 视配置而定 | 检查可用的 search 类 MCP |
-
-**搜索结果处理：**
-- 将搜索结果消化后融入教学流程，不要直接转发原文
-- 标注来源 URL 或文档名称
-- 如果搜索结果与用户材料冲突，引导用户对比分析
-
-### 类型 4：RAG / 向量数据库
-
-企业级知识库，通过 MCP 或 API 接入。
-
-**处理方式：**
-- 如果环境中配置了 RAG 类 MCP（如 Pinecone、Weaviate、自建向量库），将其视为"企业教材库"
-- 查询时使用与教学主题相关的关键词
-- 引用时标注知识条目 ID 或文档路径
-
-**接入模式：**
-```
-用户提问 → skill 提取关键词 → 查询 RAG → 获取相关文档片段 → 基于片段进行教学
-```
+This file defines how the teacher-cs skill integrates different types of knowledge sources. Design goal: let the skill leverage available knowledge sources on any platform while maintaining graceful degradation.
 
 ---
 
-## 降级策略
+## Knowledge Source Types
 
-当某类知识源不可用时，自动降级：
+### Type 1: User-Uploaded Files
 
+The most direct knowledge source. The user provides documents, code, notes, etc. directly in the conversation.
+
+**Handling:**
+- Treat file contents as "textbook" — extract teaching content from them first
+- For large files, first create a structured summary, then dive into specific sections as needed
+- When citing, note the filename and location (e.g., "Based on Chapter 3 of the OS textbook you uploaded...")
+
+**Supported formats:**
+- Text files (.md, .txt, .rst)
+- Code files (any programming language)
+- PDF (if the platform supports it)
+- Images (if the platform supports multimodal)
+
+### Type 2: Local Document Library
+
+Documents in the user's working directory, accessible via file system tools.
+
+**Handling:**
+- When the user mentions "project docs," "README," or "design docs," proactively search the working directory
+- Use Glob / Grep tools to locate relevant files
+- Read and use as teaching material
+
+**Typical paths:**
 ```
-用户文件 → 本地文档 → 互联网搜索 → RAG → 模型内置知识
-   ↑最优先                                    最后兜底↑
+project-root/
+├── docs/           → project documentation
+├── README.md       → project overview
+├── ARCHITECTURE.md → architectural design
+└── examples/       → example code
 ```
 
-每一级不可用时，跳到下一级。但要告知用户当前使用的知识源：
-- "我没有找到你的相关文档，让我搜索一下最新资料..."
-- "当前环境没有搜索工具，我会基于已有知识来教学，但建议你对时效性信息做二次确认。"
+### Type 3: Internet Search
+
+Fetch up-to-date information via search tools.
+
+**Trigger conditions (search if any apply):**
+- User explicitly requests "look up," "search," or "the latest..."
+- Content involves version numbers, release dates, API changes, or other time-sensitive information
+- An external concept is mentioned in the user's materials but not explained
+- Teaching needs a credible source to substantiate a point
+
+**Platform adaptation:**
+
+Different platforms provide different search tools — the skill should auto-detect and use whatever is available:
+
+| Platform | Search Tool | Notes |
+|----------|------------|-------|
+| Claude Code + Firecrawl MCP | `mcp__firecrawl__firecrawl_search` | Most full-featured: search + scrape |
+| Claude Code + WebSearch | `WebSearch` | Built-in search |
+| Claude.ai | built-in search | Auto-available |
+| Cursor | built-in @web | Triggered via @ command |
+| Generic MCP | depends on config | Check for available search-type MCPs |
+
+**Search result handling:**
+- Digest search results and weave them into the teaching flow — don't forward raw results
+- Cite the source URL or document name
+- If search results conflict with the user's materials, guide the user to compare and analyze
+
+### Type 4: RAG / Vector Database
+
+Enterprise-grade knowledge base, integrated via MCP or API.
+
+**Handling:**
+- If the environment has a RAG-type MCP configured (e.g., Pinecone, Weaviate, a custom vector store), treat it as an "enterprise textbook library"
+- Use keywords relevant to the teaching topic when querying
+- When citing, reference the knowledge entry ID or document path
+
+**Integration pattern:**
+```
+User question → skill extracts keywords → query RAG → retrieve relevant document chunks → teach based on chunks
+```
 
 ---
 
-## 知识源声明模板
+## Degradation Strategy
 
-在教学过程中，用以下方式标注知识来源：
+When a knowledge source is unavailable, automatically degrade:
 
-- 用户材料：「根据你提供的 [文件名]...」
-- 搜索结果：「根据 [来源名称/URL] 的最新信息...」
-- RAG 知识库：「根据知识库中的 [文档标题]...」
-- 模型知识：不需要特别标注，但对于可能过时的信息加注「注意：这是基于我的训练数据，建议确认最新版本」
+```
+User files → Local docs → Internet search → RAG → Model's built-in knowledge
+  (highest priority)                                      (last fallback)
+```
+
+Skip to the next level when one is unavailable, but inform the user of the current knowledge source:
+- "I couldn't find relevant documents — let me search for the latest information..."
+- "No search tool is available in the current environment. I'll teach based on my existing knowledge, but I recommend double-checking any time-sensitive information."
 
 ---
 
-## 扩展接入
+## Knowledge Source Citation Templates
 
-社区可以通过以下方式扩展知识源支持：
+During teaching, attribute knowledge sources as follows:
 
-1. 编写新的 MCP Server 并配置到用户环境
-2. 在 `references/` 下添加 `source-<类型>.md` 描述接入协议
-3. 在 SKILL.md 的知识源管理部分添加对新类型的引用
+- User materials: "Based on [filename] you provided..."
+- Search results: "According to the latest docs from [source/URL]..."
+- RAG knowledge base: "Based on [document title] in the knowledge base..."
+- Model knowledge: No special attribution needed, but for potentially outdated info add: "Note: this is based on my training data — I recommend confirming the latest version."
 
-这种设计确保 skill 本体不需要修改，只需要扩展参考文件即可支持新的知识源类型。
+---
+
+## Extending Knowledge Source Support
+
+The community can extend knowledge source support by:
+
+1. Writing a new MCP Server and configuring it in the user's environment
+2. Adding `source-<type>.md` in `references/` describing the integration protocol
+3. Referencing the new type in the knowledge source management section of SKILL.md
+
+This design ensures the skill itself doesn't need modification — just add reference files to support new knowledge source types.

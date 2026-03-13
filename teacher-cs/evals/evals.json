@@ -1,18 +1,18 @@
 {
   "skill_name": "teacher-cs",
-  "description": "CS 学习教练评估基准 — 验证 teacher-cs skill 在计算机科学各子领域的教学质量",
+  "description": "CS learning coach eval baseline — validates teaching quality across computer science sub-domains",
   "evals": [
     {
       "id": 1,
       "name": "algorithm-two-sum",
-      "prompt": "我想学习两数之和这道算法题，LeetCode 第 1 题。我有 15 分钟，希望引导式讲解。",
-      "expected_output": "应路由到模式 A（算法具象化），包含：直觉反应、具象化手推、变量列表、代码映射、自检清单。不应直接给出完整代码。",
+      "prompt": "I want to learn the two-sum algorithm problem, LeetCode #1. I have 15 minutes and want a guided walkthrough.",
+      "expected_output": "Should route to Mode A (Algorithm Visualization), including: initial intuition, concrete hand-trace, variable list, code mapping, self-check list. Should NOT directly provide the complete solution code.",
       "assertions": [
-        "路由到算法具象化模式",
-        "包含手推小例子的过程",
-        "包含变量列表（表格形式）",
-        "包含自检清单",
-        "不直接给出完整代码答案"
+        "routes to algorithm visualization mode",
+        "includes a concrete hand-trace with a small example",
+        "includes variable list in table format",
+        "includes self-check list",
+        "does not directly give the complete code solution"
       ],
       "domain": "algorithm",
       "tests_mode": "A"
@@ -20,14 +20,14 @@
     {
       "id": 2,
       "name": "socratic-redis-interview",
-      "prompt": "帮我准备 Redis 持久化的面试，我知道有 RDB 和 AOF 两种，但细节记不清了。",
-      "expected_output": "应路由到模式 B（苏格拉底+进阶回想），先摸底用户已知内容，然后通过提问链引导用户自己回忆和推导，而不是直接讲解。",
+      "prompt": "Help me prepare for a Redis persistence interview question. I know there's RDB and AOF, but I'm fuzzy on the details.",
+      "expected_output": "Should route to Mode B (Socratic + Advanced Recall), first probe what the user already knows, then guide the user to recall and derive through a question chain — not explain directly.",
       "assertions": [
-        "路由到苏格拉底模式",
-        "先询问用户已知内容而非直接讲解",
-        "设计递进式提问链",
-        "包含面试官追问层级提示",
-        "最终给出薄弱点清单"
+        "routes to socratic mode",
+        "asks about the user's existing knowledge before explaining",
+        "designs a progressive question chain",
+        "includes hints about interviewer follow-up depth",
+        "ends with a list of weak spots"
       ],
       "domain": "interview",
       "tests_mode": "B"
@@ -35,14 +35,14 @@
     {
       "id": 3,
       "name": "mental-model-transformer",
-      "prompt": "我想理解 Transformer 的自注意力机制，感觉很抽象，能画个图帮我理解吗？",
-      "expected_output": "应路由到模式 C（心智模型+双编码），包含 ASCII 图或结构化视觉表示，同时配文字解释。",
+      "prompt": "I want to understand the self-attention mechanism in Transformers. It feels very abstract — can you draw a diagram to help me understand?",
+      "expected_output": "Should route to Mode C (Mental Model + Dual Coding), including ASCII diagrams or structured visual representation alongside text explanation.",
       "assertions": [
-        "路由到心智模型+双编码模式",
-        "包含视觉表示（ASCII图/表格/流程图）",
-        "文字和视觉双重解释",
-        "包含连接测试题",
-        "先询问用户已有认知"
+        "routes to mental model + dual coding mode",
+        "includes visual representation (ASCII diagram / table / flowchart)",
+        "dual explanation: text and visual",
+        "includes connection test questions",
+        "first asks about the user's existing understanding"
       ],
       "domain": "ai",
       "tests_mode": "C"
@@ -50,13 +50,13 @@
     {
       "id": 4,
       "name": "knowledge-source-with-code",
-      "prompt": "我上传了一份 Go 并发编程的笔记（假设已提供），帮我基于这份笔记复习 channel 的用法。",
-      "expected_output": "应优先基于用户提供的笔记内容进行教学，引用笔记中的具体内容，而不是用模型自己的知识替代。",
+      "prompt": "I've uploaded a set of Go concurrency notes (assume provided). Help me review channel usage based on these notes.",
+      "expected_output": "Should prioritize teaching from the user-provided notes, citing specific content from the notes — not substituting with the model's own knowledge.",
       "assertions": [
-        "明确引用用户提供的材料",
-        "教学内容基于用户材料而非模型知识",
-        "标注知识来源",
-        "在材料不足时说明会补充搜索"
+        "explicitly references the user-provided materials",
+        "teaching content based on user materials, not model knowledge",
+        "cites knowledge source",
+        "mentions will supplement with search if materials are insufficient"
       ],
       "domain": "knowledge-source",
       "tests_mode": "mixed"
@@ -64,14 +64,14 @@
     {
       "id": 5,
       "name": "systematic-system-design",
-      "prompt": "我想系统学习分布式系统设计，从零开始，给我一个 30 分钟的学习计划。",
-      "expected_output": "应路由到模式 F（交错练习+生成学习），设计混合学习计划，交错不同分布式概念的练习。",
+      "prompt": "I want to systematically study distributed system design from scratch. Give me a 30-minute study plan.",
+      "expected_output": "Should route to Mode F (Interleaved Practice + Generative Learning), design a mixed study plan with interleaved practice across different distributed concepts.",
       "assertions": [
-        "路由到交错练习+生成学习模式",
-        "设计 30 分钟学习计划",
-        "包含混合练习题",
-        "包含生成任务",
-        "摸底用户当前水平"
+        "routes to interleaved practice + generative learning mode",
+        "designs a 30-minute study plan",
+        "includes mixed practice problems",
+        "includes generative tasks",
+        "probes the user's current level"
       ],
       "domain": "system-design",
       "tests_mode": "F"

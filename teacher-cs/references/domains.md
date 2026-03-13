@@ -1,71 +1,71 @@
-# 领域适配参考
+# Domain Adaptation Reference
 
-不同技术领域有不同的知识结构和最佳教学切入点。
+Different technical domains have different knowledge structures and optimal teaching entry points.
 
 ---
 
-## Go 语言
+## Go Language
 
-**高频学习场景：**
-- 并发模型（goroutine、channel、select）→ 心智模型 + 双编码（画 GMP 调度图）
-- 内存管理（GC、逃逸分析）→ 详细阐述（追问"为什么要三色标记"）
-- 接口与类型系统 → 简化 + 类比（用现实世界的"契约"类比）
-- 标准库源码阅读 → 详细阐述 + 算法具象化（逐步手推）
-- 性能优化 → 苏格拉底（引导定位瓶颈，而非直接给方案）
+**High-frequency learning scenarios:**
+- Concurrency model (goroutine, channel, select) → Mental Model + Dual Coding (draw the GMP scheduler diagram)
+- Memory management (GC, escape analysis) → Deep Elaboration (probe "why tri-color marking?")
+- Interfaces and type system → Simplification + Analogy (use real-world "contract" analogy)
+- Standard library source reading → Deep Elaboration + Algorithm Visualization (step-by-step hand-trace)
+- Performance optimization → Socratic (guide the user to locate the bottleneck, don't just give the answer)
 
-**Go 面试高频追问链：**
-goroutine 泄漏 → 如何检测 → pprof 怎么用 → 实际排查案例
+**Go interview follow-up chain:**
+goroutine leak → how to detect → how to use pprof → a real debugging case
 
-## 算法与数据结构
+## Algorithms and Data Structures
 
-**最佳模式：算法具象化（模式 A）为主**
+**Best mode: Algorithm Visualization (Mode A) as primary**
 
-关键原则：
-- 永远先手推小例子，建立直觉
-- 从暴力解开始，再优化（让用户理解优化的动机）
-- 相似题对比是核心（两数之和 vs 三数之和，差异在哪？）
-- 时间/空间复杂度不只是背，要能推导
+Key principles:
+- Always hand-trace a small example first to build intuition
+- Start from brute force, then optimize (let the user understand the motivation for optimization)
+- Comparing similar problems is core (two-sum vs. three-sum — what's different?)
+- Time / space complexity isn't just memorized — you should be able to derive it
 
-**按题型侧重：**
-| 题型 | 侧重 |
-|------|------|
-| 动态规划 | 状态转移的"为什么"比公式更重要 |
-| 树/图 | 双编码，画图是理解的前提 |
-| 双指针/滑窗 | 手推过程必须逐步展示指针移动 |
-| 贪心 | 详细阐述"为什么贪心是对的"（反证法） |
+**By problem type:**
+| Problem Type | Emphasis |
+|-------------|---------|
+| Dynamic Programming | The "why" behind state transitions matters more than the formula |
+| Trees / Graphs | Dual coding — drawing is a prerequisite for understanding |
+| Two Pointers / Sliding Window | Hand-trace must show pointer movement step by step |
+| Greedy | Deep Elaboration: "why is greedy correct?" (proof by contradiction) |
 
-## 软件工程 / 系统设计
+## Software Engineering / System Design
 
-**高频场景：**
-- 设计模式 → 类比教学 + 生成学习（让用户自己举使用场景）
-- 系统设计 → 心智模型（先画架构图）+ 苏格拉底（追问 trade-off）
-- 微服务/分布式 → 双编码（序列图 + 文字）+ 详细阐述
-- 数据库设计 → 交错练习（混合 SQL 优化、索引设计、事务隔离）
+**High-frequency scenarios:**
+- Design patterns → Analogy teaching + Generative Learning (have the user come up with use cases themselves)
+- System design → Mental Model (draw the architecture diagram first) + Socratic (probe trade-offs)
+- Microservices / Distributed → Dual Coding (sequence diagrams + text) + Deep Elaboration
+- Database design → Interleaved Practice (mix SQL optimization, index design, transaction isolation)
 
-## 大模型 / AI 技术
+## AI / LLM Technology
 
-**高频场景：**
-- Transformer 架构 → 心智模型 + 双编码（注意力矩阵可视化）
-- 训练技巧（LoRA、RLHF 等）→ 简化 + 类比（先用直觉解释，再深入数学）
-- Prompt Engineering → 交错练习（给不同场景，让用户写 prompt 对比效果）
-- RAG / Agent 架构 → 心智模型（画流程图）+ 生成学习（让用户设计一个方案）
+**High-frequency scenarios:**
+- Transformer architecture → Mental Model + Dual Coding (attention matrix visualization)
+- Training techniques (LoRA, RLHF, etc.) → Simplification + Analogy (build intuition first, then go into the math)
+- Prompt Engineering → Interleaved Practice (give different scenarios, have the user write prompts and compare results)
+- RAG / Agent architecture → Mental Model (draw the flowchart) + Generative Learning (have the user design a solution)
 
-## 面试准备
+## Interview Preparation
 
-**最佳模式组合：苏格拉底 + 进阶回想（模式 B）**
+**Best mode combination: Socratic + Advanced Recall (Mode B)**
 
-面试的核心不是背答案，而是在压力下能自主推导。
+The core of interviewing is not memorizing answers — it's being able to reason independently under pressure.
 
-流程：
-1. 用户说出主题（如"Redis 持久化"）
-2. 先让用户说出已知内容（暴露认知边界）
-3. 模拟面试官追问链（通常 3-5 层）
-4. 每次回答后标注：这一层的回答质量如何，面试官会满意吗？
-5. 最后给出完整的知识图谱 + 薄弱点清单
+Flow:
+1. User names a topic (e.g., "Redis persistence")
+2. First have the user state what they already know (reveals the boundaries of their understanding)
+3. Simulate an interviewer's follow-up chain (typically 3–5 layers deep)
+4. After each answer, note: How good was this answer? Would the interviewer be satisfied?
+5. End with a complete knowledge map + list of weak spots
 
-## 其他技术领域
+## Other CS Domains
 
-对于以上未覆盖的 CS 子领域，默认策略：
-1. 先用**简化 + 类比模式**建立基础框架（12 岁能懂的版本）
-2. 再用**心智模型 + 双编码模式**深化理解
-3. 再切到**交错练习 + 生成学习模式**，让用户输出并自测
+For CS sub-domains not listed above, the default strategy is:
+1. Use **Simplification + Analogy** to establish a foundational framework (the 12-year-old version)
+2. Use **Mental Model + Dual Coding** to deepen understanding
+3. Switch to **Interleaved Practice + Generative Learning** to have the user produce output and self-test
