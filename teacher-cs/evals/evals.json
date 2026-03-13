@@ -1,0 +1,80 @@
+{
+  "skill_name": "teacher-cs",
+  "description": "CS 学习教练评估基准 — 验证 teacher-cs skill 在计算机科学各子领域的教学质量",
+  "evals": [
+    {
+      "id": 1,
+      "name": "algorithm-two-sum",
+      "prompt": "我想学习两数之和这道算法题，LeetCode 第 1 题。我有 15 分钟，希望引导式讲解。",
+      "expected_output": "应路由到模式 A（算法具象化），包含：直觉反应、具象化手推、变量列表、代码映射、自检清单。不应直接给出完整代码。",
+      "assertions": [
+        "路由到算法具象化模式",
+        "包含手推小例子的过程",
+        "包含变量列表（表格形式）",
+        "包含自检清单",
+        "不直接给出完整代码答案"
+      ],
+      "domain": "algorithm",
+      "tests_mode": "A"
+    },
+    {
+      "id": 2,
+      "name": "socratic-redis-interview",
+      "prompt": "帮我准备 Redis 持久化的面试，我知道有 RDB 和 AOF 两种，但细节记不清了。",
+      "expected_output": "应路由到模式 B（苏格拉底+进阶回想），先摸底用户已知内容，然后通过提问链引导用户自己回忆和推导，而不是直接讲解。",
+      "assertions": [
+        "路由到苏格拉底模式",
+        "先询问用户已知内容而非直接讲解",
+        "设计递进式提问链",
+        "包含面试官追问层级提示",
+        "最终给出薄弱点清单"
+      ],
+      "domain": "interview",
+      "tests_mode": "B"
+    },
+    {
+      "id": 3,
+      "name": "mental-model-transformer",
+      "prompt": "我想理解 Transformer 的自注意力机制，感觉很抽象，能画个图帮我理解吗？",
+      "expected_output": "应路由到模式 C（心智模型+双编码），包含 ASCII 图或结构化视觉表示，同时配文字解释。",
+      "assertions": [
+        "路由到心智模型+双编码模式",
+        "包含视觉表示（ASCII图/表格/流程图）",
+        "文字和视觉双重解释",
+        "包含连接测试题",
+        "先询问用户已有认知"
+      ],
+      "domain": "ai",
+      "tests_mode": "C"
+    },
+    {
+      "id": 4,
+      "name": "knowledge-source-with-code",
+      "prompt": "我上传了一份 Go 并发编程的笔记（假设已提供），帮我基于这份笔记复习 channel 的用法。",
+      "expected_output": "应优先基于用户提供的笔记内容进行教学，引用笔记中的具体内容，而不是用模型自己的知识替代。",
+      "assertions": [
+        "明确引用用户提供的材料",
+        "教学内容基于用户材料而非模型知识",
+        "标注知识来源",
+        "在材料不足时说明会补充搜索"
+      ],
+      "domain": "knowledge-source",
+      "tests_mode": "mixed"
+    },
+    {
+      "id": 5,
+      "name": "systematic-system-design",
+      "prompt": "我想系统学习分布式系统设计，从零开始，给我一个 30 分钟的学习计划。",
+      "expected_output": "应路由到模式 F（交错练习+生成学习），设计混合学习计划，交错不同分布式概念的练习。",
+      "assertions": [
+        "路由到交错练习+生成学习模式",
+        "设计 30 分钟学习计划",
+        "包含混合练习题",
+        "包含生成任务",
+        "摸底用户当前水平"
+      ],
+      "domain": "system-design",
+      "tests_mode": "F"
+    }
+  ]
+}
