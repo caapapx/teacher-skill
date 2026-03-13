@@ -1,9 +1,9 @@
-# game-skills — Claude Code Skill Registry
+# skills — Claude Code Skill Registry
 
 A curated registry of Claude Code skills for learning, teaching, and technical mastery. Drop any skill into your project's `.claude/skills/` directory and it activates automatically.
 
 <p align="center">
-  <a href="https://github.com/caapapx/game-skills">GitHub</a> · <a href="https://github.com/caapapx/game-skills/issues">Bug & Feature</a>
+  <a href="https://github.com/caapapx/skills">GitHub</a> · <a href="https://github.com/caapapx/skills/issues">Bug & Feature</a>
 </p>
 
 ---
@@ -37,16 +37,16 @@ your-project/
 
 ```bash
 # Clone the registry
-git clone https://github.com/caapapx/game-skills.git
+git clone https://github.com/caapapx/skills.git
 
 # Copy a skill into your project
-cp -r game-skills/teacher your-project/.claude/skills/teacher
+cp -r skills/teacher your-project/.claude/skills/teacher
 ```
 
 ### Install all skills
 
 ```bash
-cp -r game-skills/* your-project/.claude/skills/
+cp -r skills/* your-project/.claude/skills/
 ```
 
 ### Trigger in Claude Code
@@ -111,11 +111,11 @@ User-provided files → Local project docs → Internet search → RAG/MCP → M
 ## Repository Structure
 
 ```
-game-skills/
+skills/
 ├── README.md
+├── CONTRIBUTING.md                # Contribution guide & cross-model compatibility notes
 ├── teacher/                       # Universal learning coach
 │   ├── SKILL.md                   # Core instructions (7 teaching modes)
-│   ├── PUBLISHING.md              # Publishing & contribution guide
 │   ├── references/
 │   │   ├── domains.md             # Universal domain routing protocol
 │   │   └── knowledge-sources.md   # Knowledge source adapter protocol
@@ -125,7 +125,7 @@ game-skills/
     ├── SKILL.md                   # CS-tuned instructions
     ├── references/
     │   ├── domains.md             # CS domain routing (algorithms, system design, AI)
-    │   └── knowledge-sources.md   # Shared knowledge source protocol
+    │   └── knowledge-sources.md   # Knowledge source adapter protocol
     └── evals/
         └── evals.json             # CS eval cases (algorithms, interviews, LLM)
 ```
@@ -158,7 +158,7 @@ Add entries to `evals/evals.json` with the format:
 
 ### Improve the skill
 
-Edit `SKILL.md` directly. The description frontmatter controls when the skill auto-triggers — keep it precise. See `PUBLISHING.md` for cross-model compatibility notes.
+Edit `SKILL.md` directly. The description frontmatter controls when the skill auto-triggers — keep it precise. See `CONTRIBUTING.md` for cross-model compatibility notes.
 
 ---
 
