@@ -1,4 +1,4 @@
-# Teacher skills — Claude Code Skill Registry
+# Teacher skill — A Powerful skill learning everything on Claude Code.
 
 A curated registry of Claude Code skills for learning, teaching, and technical mastery. Drop any skill into your project's `.claude/skills/` directory and it activates automatically.
 
