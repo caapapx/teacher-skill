@@ -3,7 +3,7 @@
 A curated registry of Claude Code skills for learning, teaching, and technical mastery. Drop any skill into your project's `.claude/skills/` directory and it activates automatically.
 
 <p align="center">
-  <a href="https://github.com/caapapx/skills">GitHub</a> · <a href="https://github.com/caapapx/skills/issues">Bug & Feature</a>
+  <a href="https://github.com/caapapx/teacher-skill">GitHub</a> · <a href="https://github.com/caapapx/teacher-skill/issues">Bug & Feature</a>
 </p>
 
 ---
