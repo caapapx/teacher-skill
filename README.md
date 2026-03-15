@@ -1,4 +1,4 @@
-# Teacher skill — A powerful skill that helps you learn everything while using Claude Code.
+# Teacher skill — Like having a master teacher who guides you one-on-one.
 
 A curated registry of Claude Code skills for learning, teaching, and technical mastery. Drop any skill into your project's `.claude/skills/` directory and it activates automatically.
 
