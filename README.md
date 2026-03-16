@@ -4,9 +4,9 @@
 
 传统的教学（1对1,1对多）或者说基于LLM提问的知识问答，做的事情是一样的：压缩知识、倾倒给用户。用户感觉高效，但一周后什么都不记得。
 
-时代变了，“被动学习”已死，这个skill帮你提升200%+🚀以上的学习效率。它用 7 种循证教学策略（retrieval practice、interleaving、dual coding……）强迫用户的大脑做功。不是因为听起来高级，而是因为[论文来源](https://www.pnas.org/doi/10.1073/pnas.1319030111)。
+时代变了，“被动学习”已死，这个 skill 帮你提升 200%+ 以上的学习效率。它用 7 种循证教学策略（retrieval practice、interleaving、dual coding……）强迫用户的大脑做功。依据来自 Freeman et al. (2014) 的元分析：[*Active learning increases student performance in science, engineering, and mathematics*](https://www.pnas.org/doi/10.1073/pnas.1319030111)，*PNAS* 111(23), 8410–8415。
 
-一套教学哲学，三个 runtime，复制即用。
+现在你可以在你喜欢的 Claude Code / Codex / Cursor 中随时使用这个 skill，复制即用。✨
 
 <p align="center">
   <a href="https://github.com/caapapx/teacher-skill">GitHub</a> · <a href="https://github.com/caapapx/teacher-skill/issues">Issues</a>
@@ -98,7 +98,7 @@ RAG / 本地知识库（企业私有数据）
 模型内建知识（经典理论、基础知识）
 ```
 
-用户的材料永远是第一优先。skill 的角色是帮用户掌握*他们的*材料，而不是替换。
+用户的材料永远是第一优先——skill 的角色是帮用户掌握 *他们的* 材料，而不是替换。✓
 
 ---
 
@@ -161,7 +161,7 @@ teacher-skill/
 
 **"两数之和怎么做？"** → 路由到模式 A（引导拆解）
 - 输出：变量表 + 状态快照式 hand-trace + 关键洞察标记 + 自检清单
-- 不直接给代码
+- 不直接给代码 👀
 
 **"Redis 持久化面试题"** → 路由到模式 B（苏格拉底）
 - 输出：基线探测 → 3-5 层追问链 → 用户自行发现知识盲区
@@ -193,14 +193,6 @@ teacher-skill/
 2. **eval 用例** — 添加到 `evals/evals.json`
 3. **改进 skill** — 直接编辑 `SKILL.md`
 4. **知识源扩展** — 写 MCP Server + `references/source-<type>.md`
-
----
-
-## 致谢
-
-- [Claude Code](https://github.com/anthropics/claude-code)
-- [OpenAI Codex](https://openai.com/codex/)
-- [Cursor](https://www.cursor.com/)
 
 ---
 
