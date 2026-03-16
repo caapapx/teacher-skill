@@ -1,4 +1,6 @@
-# teacher-skill
+# Super Teacher for Claude Code
+
+[English](./README.md) | [中文](./README.zh-CN.md)
 
 **A 300-line teaching workflow that turns AI from an answer machine into a Socratic tutor.**
 
@@ -19,7 +21,7 @@ https://www.pnas.org/doi/10.1073/pnas.1319030111
 
 ---
 
-## Quick Start (English Default)
+## Quick Start
 
 Pick your runtime and copy one folder:
 
@@ -60,7 +62,7 @@ The architecture below shows how resources are indexed, converted into adaptive 
 
 Core result: active learning improves exam performance by about **0.47 SD**, and lecture-only settings show much higher failure risk (Freeman et al., 2014).
 
-<img src="docs/freeman-2014-fig1-failure-rate.jpg" width="600" alt="Freeman et al. 2014 Fig 1: Active learning vs lecture failure rates" />
+![Freeman et al. 2014 Fig 1: Active learning vs lecture failure rates](docs/freeman-2014-fig1-failure-rate.jpg)
 
 Operational impact snapshot (workflow efficiency):
 
@@ -146,6 +148,7 @@ User material is always first priority.
 ```text
 teacher-skill/
 ├── README.md
+├── README.zh-CN.md
 ├── CONTRIBUTING.md
 ├── teacher/
 │   ├── SKILL.md
@@ -201,74 +204,3 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md). Typical contribution paths:
 ## License
 
 MIT
-
----
-
-## 中文说明（Chinese）
-
-**一个约 300 行的教学流程，把 AI 从“答案机器”变成“苏格拉底式导师”。**
-
-<p align="center">
-  <img src="docs/skill-logo.png" width="180" alt="teacher-skill logo" />
-</p>
-
-传统教学（1 对 1 / 1 对多）和大多数 LLM 问答本质上都在“压缩知识并灌输”。短期看起来高效，但长期留存不足。
-
-本项目把检索练习、交错练习、双重编码、自我解释、元认知与苏格拉底提问组合成可执行的教学策略，目标是提升理解深度与迁移能力。
-
-核心研究依据：Freeman et al. (2014), *PNAS*。主动学习相较纯讲授在成绩与不及格率上有显著优势。  
-https://www.pnas.org/doi/10.1073/pnas.1319030111
-
-### 快速安装
-
-按 runtime 复制对应目录：
-
-```bash
-# Claude Code
-cp -r teacher-cs/claude your-project/.claude/skills/teacher-cs
-
-# Codex
-cp -r teacher-cs/codex your-project/.codex/skills/teacher-cs
-
-# Cursor
-cp -r teacher-cs/cursor your-project/.cursor/skills/teacher-cs
-```
-
-通用版（不限 CS）使用 `teacher/` 目录。安装后正常提问即可，skill 会自动接管教学流程。
-
-### 系统架构一图看懂
-
-下图展示了资源库、标签索引、技能路径生成、教师端与学生端之间的闭环关系，以及新型教师能力结构。
-
-<img src="docs/skill-desribe.png" width="900" alt="资源流架构与教师新能力结构" />
-
-### 教学模式
-
-提供 7 种模式（A-G），包括引导拆解、苏格拉底追问、心智模型+可视化、类比简化、深度追问、交错练习、元认知诊断。系统会根据时间预算、交互强度、用户基础动态路由。
-
-### 提效对比
-
-下图给出 `teacher-skill` 引入前后的流程时间对比，强调“规划、批改、资源检索”三个关键环节的压缩效果。
-
-<img src="docs/skill-boost-comparison.png" width="900" alt="teacher-skill 提效对比图" />
-
-### 知识源优先级
-
-1. 用户材料（教材/笔记/代码）
-2. 互联网最新资料
-3. RAG / 本地知识库
-4. 模型内建知识
-
-用户材料始终优先。
-
-### `teacher` 与 `teacher-cs`
-
-- `teacher`: 通用学习教练，适用于任意学科。
-- `teacher-cs`: 面向计算机科学，强化算法 trace、系统设计、面试训练和可视化教学。
-
-### 贡献与路线图
-
-- 新增领域适配器、扩展 eval、改进 `SKILL.md`、扩展知识源。
-- TODO 包含更多学科适配、跨 runtime 一致性测试、可视化模板扩展和学习进度追踪。
-
-License: MIT
