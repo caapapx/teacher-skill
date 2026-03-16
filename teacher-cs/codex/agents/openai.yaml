@@ -1,0 +1,7 @@
+interface:
+  display_name: "Teacher-CS"
+  short_description: "通过提问、类比、练习和自测引导计算机科学与软件工程学习"
+  default_prompt: "Use $teacher-cs to coach me through a CS topic with questions, examples, and self-checks instead of giving the answer immediately."
+
+policy:
+  allow_implicit_invocation: true

@@ -54,7 +54,7 @@ Edit `SKILL.md` directly. The `description` frontmatter controls when the skill 
 
 ## Cross-Model Compatibility Notes
 
-The skills are designed to work across different Claude deployments and AI environments. Key design decisions:
+The skills are designed to work across multiple runtimes and AI environments. Key design decisions:
 
 | Concern | Solution |
 |---------|---------|
@@ -62,6 +62,8 @@ The skills are designed to work across different Claude deployments and AI envir
 | Different file reading methods | Uses generic description "read the file" — let the model choose available tools |
 | MCP availability varies | `knowledge-sources.md` defines a graceful degradation strategy |
 | Multimodal support varies | ASCII diagrams as the baseline visual representation; image generation as an enhancement |
+| Runtime-specific metadata | Keep runtime-only files inside runtime folders such as `teacher-cs/codex/agents/` |
+| Runtime packaging differences | `teacher-cs/claude`, `teacher-cs/codex`, and `teacher-cs/cursor` stay self-contained for copy-install |
 
 ---
 
@@ -84,4 +86,5 @@ If you build a domain adapter that references proprietary sources:
 - No private or sensitive information in any committed file
 - New domain adapters follow the structure in `references/domains.md`
 - Eval cases include explicit, verifiable assertions
-- All content is in English (the project's publication language)
+- README and contribution docs should stay in English
+- Runtime skill content may remain in the source language used by that runtime if that is the canonical upstream version
