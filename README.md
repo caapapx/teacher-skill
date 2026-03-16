@@ -1,12 +1,13 @@
 # teacher-skill
 
-**300 行教学逻辑，把 AI 从答案机器变成苏格拉底。**
+**A 300-line teaching workflow that turns AI from an answer machine into a Socratic tutor.**
 
-传统的教学（1对1,1对多）或者说基于LLM提问的知识问答，做的事情是一样的：压缩知识、倾倒给用户。用户感觉高效，但一周后什么都不记得。
+Traditional tutoring (1:1, 1:many) and most LLM Q&A do the same thing: compress knowledge and dump it to users. It feels efficient, but retention is weak.
 
-时代变了，“被动学习”已死，这个 skill 帮你提升 200%+ 以上的学习效率。它用 7 种循证教学策略（retrieval practice、interleaving、dual coding……）强迫用户的大脑做功。依据来自 Freeman et al. (2014) 的元分析：[*Active learning increases student performance in science, engineering, and mathematics*](https://www.pnas.org/doi/10.1073/pnas.1319030111)，*PNAS* 111(23), 8410–8415。
+This skill uses evidence-based learning strategies (retrieval practice, interleaving, dual coding, self-explanation, metacognition, and Socratic questioning) to force active thinking and improve transfer.
 
-现在你可以在你喜欢的 Claude Code / Codex / Cursor 中随时使用这个 skill，复制即用。✨
+Research anchor: Freeman et al. (2014), *Active learning increases student performance in science, engineering, and mathematics*, *PNAS* 111(23), 8410-8415.  
+https://www.pnas.org/doi/10.1073/pnas.1319030111
 
 <p align="center">
   <a href="https://github.com/caapapx/teacher-skill">GitHub</a> · <a href="https://github.com/caapapx/teacher-skill/issues">Issues</a>
@@ -14,9 +15,9 @@
 
 ---
 
-## Quick Start
+## Quick Start (English Default)
 
-选你的 runtime，一条命令装好：
+Pick your runtime and copy one folder:
 
 ```bash
 # Claude Code
@@ -29,173 +30,213 @@ cp -r teacher-cs/codex your-project/.codex/skills/teacher-cs
 cp -r teacher-cs/cursor your-project/.cursor/skills/teacher-cs
 ```
 
-通用版（不限 CS）：把 `teacher/` 复制到对应 runtime 的 skills 路径。
+For the generic version (not CS-only), copy `teacher/` to your runtime's skills path.
 
-装完之后，像平时一样提问。skill 会自动接管教学。
-
----
-
-## 被动教学 vs 主动教学
-
-| 维度 | 被动模式（传统 prompt） | 主动模式（teacher-skill） |
-|------|----------------------|------------------------|
-| 用户能复述定义？ | 通常可以 | 可以 |
-| 用户能解新题？ | 不可靠 | 显著更好 |
-| 系统能定位误解？ | 弱 | 强 |
-| 用户在课中产出内容？ | 极少 | 强制 |
-| 课程适配用户水平？ | 通常不 | 内建 |
-
-核心数据：主动学习相比纯讲授，考试成绩提升约 **0.47 个标准差**，纯讲授课程不及格率显著更高（[Freeman et al., PNAS 2014](https://www.pnas.org/doi/10.1073/pnas.1319030111)）。
+After install, ask questions as usual. The skill takes over the teaching flow automatically.
 
 ---
 
-## 7 种教学模式
+## Passive vs Active Teaching
 
-skill 不是一个技巧，是一个教学模式栈，根据用户意图自动切换。
+| Dimension | Passive mode (typical prompt) | Active mode (`teacher-skill`) |
+|---|---|---|
+| Can the user restate definitions? | Usually | Yes |
+| Can the user solve new problems? | Unreliable | Significantly better |
+| Can the system detect misconceptions? | Weak | Strong |
+| User-generated output during session | Minimal | Required |
+| Adaptive to user level | Often no | Built in |
 
-| 模式 | 名称 | 做什么 | 触发场景 |
-|------|------|--------|----------|
-| A | 引导拆解 | 逐步分解问题，手动 trace | 算法题、数学推导、case 分析 |
-| B | 苏格拉底 + 高级回忆 | 提问链驱动深层理解 | 面试准备、概念深挖 |
-| C | 心智模型 + 双重编码 | 文字 + 图表解释复杂抽象 | 系统设计、GMP 调度、Transformer |
-| D | 简化 + 类比 | 把术语墙变成 12 岁能懂的话 | 入门概念、"什么是 goroutine？" |
-| E | 深度追问 | 连续 why/how/boundary 探测 | "为什么是这样？"类问题 |
-| F | 交错练习 + 生成式学习 | 混合练习 + 总结/闪卡/类比 | "系统学习 X" |
-| G | 元认知策略 | 诊断学习效率，推荐更好方法 | "我学不进去"、低留存 |
+Core result: active learning improves exam performance by about **0.47 SD**, and lecture-only settings show much higher failure risk (Freeman et al., 2014).
 
-路由决策基于四个维度：时间预算、回答偏好、交互强度、基线水平。支持 session 内动态切换。
+<img src="docs/freeman-2014-fig1-failure-rate.jpg" width="600" alt="Freeman et al. 2014 Fig 1: Active learning vs lecture failure rates" />
 
 ---
 
-## 教学方法的学术依据
+## Seven Teaching Modes
 
-每个模式都映射到已发表的学习科学研究，不是 productivity hack。
+| Mode | Name | What it does | Typical trigger |
+|---|---|---|---|
+| A | Guided Decomposition | Stepwise breakdown and manual trace | Algorithms, math derivations, case analysis |
+| B | Socratic + Advanced Retrieval | Question chains for deep understanding | Interview prep, concept deep dive |
+| C | Mental Model + Dual Coding | Explain abstract ideas with text + visuals | System design, scheduling, Transformer |
+| D | Simplification + Analogy | Translate jargon into beginner language | Intro concepts, "what is X?" |
+| E | Deep Inquiry | Iterative why/how/boundary probing | Mechanism and causality questions |
+| F | Interleaving + Generative Learning | Mixed drills + summaries/flashcards/analogies | "Learn X systematically" |
+| G | Metacognitive Strategy | Diagnose learning bottlenecks | Low retention, stuck learning |
 
-| 方法 | 来源 | 关键发现 |
-|------|------|----------|
-| 主动学习 | [Freeman et al., 2014](https://www.pnas.org/doi/10.1073/pnas.1319030111) | 效果量 +0.47 SD，纯讲授不及格率更高 |
-| 检索练习 | [Roediger & Karpicke, 2006](https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x) | 测试效应：回忆 > 重复阅读 |
-| 交错练习 | [Rohrer & Taylor, 2007](https://www.tandfonline.com/doi/abs/10.1080/00220970709598675) | 混合练习优于分块练习 |
-| 双重编码 | [Clark & Paivio, 1991](https://files.eric.ed.gov/fulltext/ED340377.pdf) | 文字 + 图像 > 纯文字 |
-| 自我解释 | [Chi et al., 1989](https://www.taylorfrancis.com/chapters/edit/10.4324/9780203052860-13/) | 主动解释的学生表现显著更好 |
-| 元认知 | [Flavell, 1979](https://psycnet.apa.org/record/1980-09388-001) | 监控自身理解的能力可以训练 |
-| 苏格拉底提问 | [Graesser & Person, 1994](https://link.springer.com/article/10.1007/BF02310573) | 引导性提问优于直接告知 |
-| 高效学习技术综述 | [Dunlosky et al., 2013](https://journals.sagepub.com/doi/10.1177/1529100612453266) | 检索和交错是最高效用技术 |
+Routing adapts by time budget, answer style, interaction intensity, and baseline level.
 
 ---
 
-## 知识源优先级
+## Evidence Base
 
-教学内容的来源决定教学质量。skill 按以下顺序选择知识源：
+| Method | Source | Key finding |
+|---|---|---|
+| Active learning | https://www.pnas.org/doi/10.1073/pnas.1319030111 | +0.47 SD effect size |
+| Retrieval practice | https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x | Recall beats re-reading |
+| Interleaving | https://www.tandfonline.com/doi/abs/10.1080/00220970709598675 | Mixed practice > blocked practice |
+| Dual coding | https://files.eric.ed.gov/fulltext/ED340377.pdf | Words + visuals > words only |
+| Self-explanation | https://www.taylorfrancis.com/chapters/edit/10.4324/9780203052860-13/ | Active explanation improves outcomes |
+| Metacognition | https://psycnet.apa.org/record/1980-09388-001 | Monitoring understanding is trainable |
+| Socratic questioning | https://link.springer.com/article/10.1007/BF02310573 | Guided inquiry outperforms direct telling |
+| Learning-techniques review | https://journals.sagepub.com/doi/10.1177/1529100612453266 | Retrieval/interleaving are high-utility |
+
+---
+
+## Knowledge Source Priority
 
 ```
-用户上传的材料（教材、笔记、代码）
-  ↓ 不够时
-互联网搜索（最新文档、API、breaking changes）
-  ↓ 不可用时
-RAG / 本地知识库（企业私有数据）
-  ↓ 未配置时
-模型内建知识（经典理论、基础知识）
+User-provided material (notes, textbooks, code)
+  -> if insufficient
+Web search (latest docs, APIs, breaking changes)
+  -> if unavailable
+RAG / local knowledge base
+  -> if not configured
+Model internal knowledge
 ```
 
-用户的材料永远是第一优先——skill 的角色是帮用户掌握 *他们的* 材料，而不是替换。✓
+User material is always first priority.
 
 ---
 
-## teacher vs teacher-cs
+## `teacher` vs `teacher-cs`
 
-| skill | 适用范围 | 优化方向 |
-|-------|----------|----------|
-| [`teacher`](./teacher/) | 任意学科 | 概念形成、复习、引导练习 |
-| [`teacher-cs`](./teacher-cs/) | 计算机科学 | 算法 trace、系统设计、runtime 内部、面试、可视化教学 |
+| Skill | Scope | Optimization |
+|---|---|---|
+| [`teacher`](./teacher/) | Any domain | Concept formation, review, guided drills |
+| [`teacher-cs`](./teacher-cs/) | Computer science | Algorithm tracing, system design, interview training, visual pedagogy |
 
-`teacher-cs` 额外包含：
+`teacher-cs` adds:
 
-- **算法可视化** — 状态快照式 hand-trace，不只是伪代码
-- **CS domain adapter** — Go / 算法 / 系统设计 / AI / 面试的专属教学策略
-- **交互式 HTML 可视化** — 并发系统、状态机、数据结构操作
-- **可视化设计系统** — ASCII → Mermaid → HTML 的复杂度决策树，GitHub 暗色主题配色
-
----
-
-## Runtime 矩阵
-
-| Runtime | 路径 | 特点 |
-|---------|------|------|
-| Claude Code | [`teacher-cs/claude/`](./teacher-cs/claude/) | 完整版：evals + knowledge-sources + viz-patterns |
-| Codex | [`teacher-cs/codex/`](./teacher-cs/codex/) | 含 `agents/openai.yaml`，Codex 适配 prompt |
-| Cursor | [`teacher-cs/cursor/`](./teacher-cs/cursor/) | 精简版，核心教学逻辑 |
-
-一套教学哲学，三个自包含包，复制即安装，零翻译成本。
+- Algorithm state-snapshot tracing
+- CS domain adapters (Go, algorithms, systems, AI, interviews)
+- Interactive HTML visualizations
+- Visualization decision tree (ASCII -> Mermaid -> HTML)
 
 ---
 
-## 仓库结构
+## Runtime Matrix
 
-```
+| Runtime | Path | Notes |
+|---|---|---|
+| Claude Code | [`teacher-cs/claude/`](./teacher-cs/claude/) | Full package: evals + knowledge sources + viz patterns |
+| Codex | [`teacher-cs/codex/`](./teacher-cs/codex/) | Includes `agents/openai.yaml` |
+| Cursor | [`teacher-cs/cursor/`](./teacher-cs/cursor/) | Lean package with core teaching logic |
+
+---
+
+## Repo Structure
+
+```text
 teacher-skill/
 ├── README.md
 ├── CONTRIBUTING.md
-├── teacher/                  # 通用学习教练
-│   ├── SKILL.md              # 教学逻辑（309 行）
-│   ├── references/           # 领域适配协议
-│   └── evals/                # 5 个基准测试用例
-└── teacher-cs/               # CS 专业版
-    ├── evals/                # 共享评估用例
-    ├── claude/               # Claude Code 完整包
+├── teacher/
+│   ├── SKILL.md
+│   ├── references/
+│   └── evals/
+└── teacher-cs/
+    ├── evals/
+    ├── claude/
     │   ├── SKILL.md
-    │   ├── references/       # domains + knowledge-sources + viz-patterns
+    │   ├── references/
     │   └── evals/
-    ├── codex/                # Codex 适配包
+    ├── codex/
     │   ├── SKILL.md
     │   ├── agents/
     │   └── references/
-    └── cursor/               # Cursor 适配包
+    └── cursor/
         ├── SKILL.md
         └── references/
 ```
 
 ---
 
-## 真实教学场景
+## Real Teaching Scenarios
 
-**"两数之和怎么做？"** → 路由到模式 A（引导拆解）
-- 输出：变量表 + 状态快照式 hand-trace + 关键洞察标记 + 自检清单
-- 不直接给代码 👀
-
-**"Redis 持久化面试题"** → 路由到模式 B（苏格拉底）
-- 输出：基线探测 → 3-5 层追问链 → 用户自行发现知识盲区
-
-**"解释 Transformer 的 attention"** → 路由到模式 C（心智模型 + 双重编码）
-- 输出：Q/K/V 矩阵 ASCII 图 + 文字解释 + 1-2 道检验题
-- 用户必须作答才能继续
-
-**"系统学习分布式系统"** → 路由到模式 F（交错练习）
-- 输出：30 分钟学习计划 + 混合概念题 + 生成式任务（总结/类比/闪卡）
+- "How do I solve Two Sum?" -> Mode A, outputs variable table + step snapshots + self-checks, not direct final code.
+- "Redis persistence interview prep" -> Mode B, baseline probe + multi-layer question chain.
+- "Explain Transformer attention" -> Mode C, matrix-style visual + explanation + checks.
+- "Systematically learn distributed systems" -> Mode F, time-boxed plan + mixed drills + generative tasks.
 
 ---
 
 ## TODO
 
-- [ ] 更多学科的 domain adapter（医学、法律、金融）
-- [ ] eval 用例从 5 个扩展到 20+
-- [ ] 跨 runtime 一致性自动化测试
-- [ ] 可视化模板库扩展
-- [ ] 学习进度追踪机制
+- [ ] More domain adapters (medicine, law, finance)
+- [ ] Expand eval cases (5 -> 20+)
+- [ ] Cross-runtime consistency tests
+- [ ] Visualization template expansion
+- [ ] Learning-progress tracking
 
 ---
 
-## 贡献
+## Contributing
 
-详见 [CONTRIBUTING.md](./CONTRIBUTING.md)。四种贡献路径：
+See [CONTRIBUTING.md](./CONTRIBUTING.md). Typical contribution paths:
 
-1. **新 domain adapter** — 创建 `references/domain-<name>.md`
-2. **eval 用例** — 添加到 `evals/evals.json`
-3. **改进 skill** — 直接编辑 `SKILL.md`
-4. **知识源扩展** — 写 MCP Server + `references/source-<type>.md`
+1. Add a new domain adapter in `references/domain-<name>.md`
+2. Add eval cases in `evals/evals.json`
+3. Improve teaching logic in `SKILL.md`
+4. Extend knowledge sources with MCP server + `references/source-<type>.md`
 
 ---
 
 ## License
 
 MIT
+
+---
+
+## 中文说明（Chinese）
+
+**一个约 300 行的教学流程，把 AI 从“答案机器”变成“苏格拉底式导师”。**
+
+传统教学（1 对 1 / 1 对多）和大多数 LLM 问答本质上都在“压缩知识并灌输”。短期看起来高效，但长期留存不足。
+
+本项目把检索练习、交错练习、双重编码、自我解释、元认知与苏格拉底提问组合成可执行的教学策略，目标是提升理解深度与迁移能力。
+
+核心研究依据：Freeman et al. (2014), *PNAS*。主动学习相较纯讲授在成绩与不及格率上有显著优势。  
+https://www.pnas.org/doi/10.1073/pnas.1319030111
+
+### 快速安装
+
+按 runtime 复制对应目录：
+
+```bash
+# Claude Code
+cp -r teacher-cs/claude your-project/.claude/skills/teacher-cs
+
+# Codex
+cp -r teacher-cs/codex your-project/.codex/skills/teacher-cs
+
+# Cursor
+cp -r teacher-cs/cursor your-project/.cursor/skills/teacher-cs
+```
+
+通用版（不限 CS）使用 `teacher/` 目录。安装后正常提问即可，skill 会自动接管教学流程。
+
+### 教学模式
+
+提供 7 种模式（A-G），包括引导拆解、苏格拉底追问、心智模型+可视化、类比简化、深度追问、交错练习、元认知诊断。系统会根据时间预算、交互强度、用户基础动态路由。
+
+### 知识源优先级
+
+1. 用户材料（教材/笔记/代码）
+2. 互联网最新资料
+3. RAG / 本地知识库
+4. 模型内建知识
+
+用户材料始终优先。
+
+### `teacher` 与 `teacher-cs`
+
+- `teacher`: 通用学习教练，适用于任意学科。
+- `teacher-cs`: 面向计算机科学，强化算法 trace、系统设计、面试训练和可视化教学。
+
+### 贡献与路线图
+
+- 新增领域适配器、扩展 eval、改进 `SKILL.md`、扩展知识源。
+- TODO 包含更多学科适配、跨 runtime 一致性测试、可视化模板扩展和学习进度追踪。
+
+License: MIT
