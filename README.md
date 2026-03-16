@@ -2,6 +2,10 @@
 
 **A 300-line teaching workflow that turns AI from an answer machine into a Socratic tutor.**
 
+<p align="center">
+  <img src="docs/skill-logo.png" width="220" alt="teacher-skill logo" />
+</p>
+
 Traditional tutoring (1:1, 1:many) and most LLM Q&A do the same thing: compress knowledge and dump it to users. It feels efficient, but retention is weak.
 
 This skill uses evidence-based learning strategies (retrieval practice, interleaving, dual coding, self-explanation, metacognition, and Socratic questioning) to force active thinking and improve transfer.
@@ -36,6 +40,14 @@ After install, ask questions as usual. The skill takes over the teaching flow au
 
 ---
 
+## System Architecture (At a Glance)
+
+The architecture below shows how resources are indexed, converted into adaptive skill paths, and fed back through teacher/student loops.
+
+<img src="docs/skill-desribe.png" width="900" alt="Resource flow architecture and teacher new skillset" />
+
+---
+
 ## Passive vs Active Teaching
 
 | Dimension | Passive mode (typical prompt) | Active mode (`teacher-skill`) |
@@ -49,6 +61,10 @@ After install, ask questions as usual. The skill takes over the teaching flow au
 Core result: active learning improves exam performance by about **0.47 SD**, and lecture-only settings show much higher failure risk (Freeman et al., 2014).
 
 <img src="docs/freeman-2014-fig1-failure-rate.jpg" width="600" alt="Freeman et al. 2014 Fig 1: Active learning vs lecture failure rates" />
+
+Operational impact snapshot (workflow efficiency):
+
+<img src="docs/skill-boost-comparison.png" width="900" alt="Skill boost comparison: before and after with teacher-skill" />
 
 ---
 
@@ -192,6 +208,10 @@ MIT
 
 **一个约 300 行的教学流程，把 AI 从“答案机器”变成“苏格拉底式导师”。**
 
+<p align="center">
+  <img src="docs/skill-logo.png" width="180" alt="teacher-skill logo" />
+</p>
+
 传统教学（1 对 1 / 1 对多）和大多数 LLM 问答本质上都在“压缩知识并灌输”。短期看起来高效，但长期留存不足。
 
 本项目把检索练习、交错练习、双重编码、自我解释、元认知与苏格拉底提问组合成可执行的教学策略，目标是提升理解深度与迁移能力。
@@ -216,9 +236,21 @@ cp -r teacher-cs/cursor your-project/.cursor/skills/teacher-cs
 
 通用版（不限 CS）使用 `teacher/` 目录。安装后正常提问即可，skill 会自动接管教学流程。
 
+### 系统架构一图看懂
+
+下图展示了资源库、标签索引、技能路径生成、教师端与学生端之间的闭环关系，以及新型教师能力结构。
+
+<img src="docs/skill-desribe.png" width="900" alt="资源流架构与教师新能力结构" />
+
 ### 教学模式
 
 提供 7 种模式（A-G），包括引导拆解、苏格拉底追问、心智模型+可视化、类比简化、深度追问、交错练习、元认知诊断。系统会根据时间预算、交互强度、用户基础动态路由。
+
+### 提效对比
+
+下图给出 `teacher-skill` 引入前后的流程时间对比，强调“规划、批改、资源检索”三个关键环节的压缩效果。
+
+<img src="docs/skill-boost-comparison.png" width="900" alt="teacher-skill 提效对比图" />
 
 ### 知识源优先级
 
